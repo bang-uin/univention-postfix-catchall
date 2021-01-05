@@ -1,0 +1,6 @@
+# Automatically added by univention-install-config-registry
+if [ "$1" = "remove" ] && [ -e /etc/univention/templates/info/univention-postfix-catchall.info ] ; then
+  [ -x /usr/sbin/univention-config-registry ] && univention-config-registry unregister univention-postfix-catchall || true
+  mv /etc/univention/templates/info/univention-postfix-catchall.info /etc/univention/templates/removed/univention-postfix-catchall.info || true
+fi
+# End automatically added section

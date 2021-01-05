@@ -1,0 +1,5 @@
+univention-postfix-catchall (0.1) unstable; urgency=medium
+
+  * Initial Release.
+
+ -- root <bang-uin@air-snitch.de>  Tue, 05 Jan 2021 13:58:14 +0100

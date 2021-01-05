@@ -1,0 +1,22 @@
+Source: univention-postfix-catchall
+Section: univention
+Priority: optional
+Maintainer: root <bang-uin@air-snitch.de>
+Build-Depends: debhelper (>= 9), univention-config-dev
+Standards-Version: 3.9.8
+Homepage: https://github.com/bang-uin/univention-postfix-catchall
+
+Package: univention-postfix-catchall
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, postfix, univention-mail-postfix
+Description: Configurable catchall adress for mail domains
+ Adds configurable catchall adress for all mail domains.
+ Just set ucr variable mail/catchall/prefix to the desired prefix
+ and assign a corresponding alternative mail addresses to a user who
+ should receive the mails.
+ E.g.:
+ . 
+  * prefix is set to "catchall"
+  * assign "catchall@your.tld" to one or more users
+  * all emails sent to non-existing addresses of @your.tld will be redirected to catchall@your.tld
+ .

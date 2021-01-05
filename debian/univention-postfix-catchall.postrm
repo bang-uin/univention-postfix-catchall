@@ -1,0 +1,27 @@
+#! /bin/bash
+set -e
+
+case "$1" in
+remove)
+	# Remove catchall prefix
+	ucr unset mail/catchall/prefix
+
+	# Remove ldap.catchall from virtual.maps
+	cur=$(ucr get mail/postfix/virtual/alias/maps)
+	lca=",ldap:/etc/postfix/ldap.catchall"
+	cur=${cur/$lca}
+	ucr set mail/postfix/virtual/alias/maps=$cur
+
+	invoke-rc.d postfix restart
+	;;
+purge|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+	;;
+*)
+	echo "postrm called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0

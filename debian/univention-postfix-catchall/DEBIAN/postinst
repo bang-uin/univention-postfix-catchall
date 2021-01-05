@@ -1,0 +1,36 @@
+#! /bin/bash
+set -e
+
+case "$1" in
+configure)
+    # Set UCR variable if previously unset
+    ucr set mail/catchall/prefix?catchall
+
+    # Add ldap.catchall to virtual.maps
+    cur=$(ucr get mail/postfix/virtual/alias/maps)
+    lca="ldap:/etc/postfix/ldap.catchall"
+
+    if [[ $cur != *$lca* ]]; then
+        cur="${cur},${lca}"
+        ucr set mail/postfix/virtual/alias/maps=$cur
+    fi
+
+	invoke-rc.d postfix restart
+    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by univention-install-config-registry
+if [ "$1" = "abort-remove" ]; then
+  [ -e /etc/univention/templates/removed/univention-postfix-catchall.info ] && mv /etc/univention/templates/removed/univention-postfix-catchall.info /etc/univention/templates/info/univention-postfix-catchall.info || true
+fi
+[ -x /usr/sbin/univention-config-registry ] && univention-config-registry register univention-postfix-catchall || true
+# End automatically added section
+
+
+exit 0

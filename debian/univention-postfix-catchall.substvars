@@ -1,0 +1,2 @@
+misc:Depends=univention-config (>= 7.0.25)
+misc:Pre-Depends=

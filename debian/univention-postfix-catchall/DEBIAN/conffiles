@@ -1,0 +1,2 @@
+/etc/univention/templates/files/etc/postfix/ldap.catchall.d/10_base
+/etc/univention/templates/info/univention-postfix-catchall.info

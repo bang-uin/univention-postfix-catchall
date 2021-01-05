@@ -1,0 +1,30 @@
+#! /bin/bash
+set -e
+
+case "$1" in
+configure)
+    # Set UCR variable if previously unset
+    ucr set mail/catchall/prefix?catchall
+
+    # Add ldap.catchall to virtual.maps
+    cur=$(ucr get mail/postfix/virtual/alias/maps)
+    lca="ldap:/etc/postfix/ldap.catchall"
+
+    if [[ $cur != *$lca* ]]; then
+        cur="${cur},${lca}"
+        ucr set mail/postfix/virtual/alias/maps=$cur
+    fi
+
+	invoke-rc.d postfix restart
+    ;;
+abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
