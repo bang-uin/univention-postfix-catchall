@@ -16,5 +16,6 @@ Adds configurable catchall adress for all mail domains.
 
 ## Howto use
 1. Clone repo
-2. Build package 'dpkg-buildpackage -b'
-3. Install package.
+2. Install debhelper and univention-config-dev
+3. Build package 'dpkg-buildpackage -b'
+4. Install package.
